@@ -5,6 +5,12 @@ import com.example.libreriaduoc.libreriaduoc.service.LibroService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+// LibroController.java
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import java.util.Map;
+
 import java.util.List;
 
 /**
@@ -55,12 +61,13 @@ public class LibroController {
     }
 
     /** DELETE /api/libros/{id} - Elimina (204/404) */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        if (service.findById(id).isEmpty()) {
-            return ResponseEntity.notFound().build();
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Map<String, Object>> eliminar(@PathVariable Long id) {
+        boolean eliminado = service.delete(id);
+        if (!eliminado) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message", "Libro no encontrado", "id", id));
         }
-        service.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(Map.of("message", "Eliminación exitosa", "id", id));
     }
 }

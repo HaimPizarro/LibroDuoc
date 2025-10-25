@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class LibroModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ok si la columna id es identity/bigserial
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 200)

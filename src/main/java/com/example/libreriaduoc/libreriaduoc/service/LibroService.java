@@ -8,10 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Clase LibroService
- * aplica validaciones y reglas de negocio.
- */
 @Service
 @Transactional
 public class LibroService {
@@ -22,22 +18,14 @@ public class LibroService {
         this.repository = repository;
     }
 
-    /** Lista todos los libros. */
     public List<LibroModel> findAll() {
         return repository.findAll();
     }
 
-    /** Busca por id */
     public Optional<LibroModel> findById(Long id) {
         return repository.findById(id);
     }
 
-    /**
-     * Guarda o actualiza un libro.
-     * - Si id == null → INSERT
-     * - Si id != null → UPDATE
-     * Incluye validaciones mínimas.
-     */
     public LibroModel save(LibroModel libro) {
         if (libro.getTitulo() == null || libro.getTitulo().trim().isEmpty()) {
             throw new IllegalArgumentException("El título es obligatorio.");
@@ -48,8 +36,9 @@ public class LibroService {
         return repository.save(libro);
     }
 
-    /** Elimina por id. */
-    public void delete(Long id) {
+    public boolean delete(Long id) {
+        if (!repository.existsById(id)) return false;
         repository.deleteById(id);
+        return true;
     }
 }
