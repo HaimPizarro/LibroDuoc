@@ -10,9 +10,7 @@ import java.util.Optional;
 
 /**
  * Clase LibroService
- * ------------------
- * Capa intermedia entre el controlador (API REST) y el repositorio (BD).
- * Aquí puedes aplicar validaciones y reglas de negocio.
+ * aplica validaciones y reglas de negocio.
  */
 @Service
 @Transactional
@@ -29,7 +27,7 @@ public class LibroService {
         return repository.findAll();
     }
 
-    /** Busca por id (puede no existir). */
+    /** Busca por id */
     public Optional<LibroModel> findById(Long id) {
         return repository.findById(id);
     }

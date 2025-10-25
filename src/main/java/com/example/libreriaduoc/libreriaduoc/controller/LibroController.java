@@ -1,6 +1,6 @@
 package com.example.libreriaduoc.libreriaduoc.controller;
 
-import com.example.libreriaduoc.libreriaduoc.model.LibroModel;   // <- OJO: LibroModel
+import com.example.libreriaduoc.libreriaduoc.model.LibroModel;
 import com.example.libreriaduoc.libreriaduoc.service.LibroService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,9 +9,7 @@ import java.util.List;
 
 /**
  * Clase LibroController
- * ---------------------
  * Expone los endpoints REST para gestionar Libros.
- * Prefijo común: /api/libros
  */
 @RestController
 @RequestMapping("/api/libros")
